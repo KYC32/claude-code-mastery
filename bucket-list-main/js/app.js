@@ -202,13 +202,13 @@ class BucketListApp {
                 <div class="flex gap-2 flex-shrink-0">
                     <button
                         class="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200 transition-colors text-sm font-medium"
-                        onclick="app.openEditModal('${item.id}', '${this.escapeHtml(item.title).replace(/'/g, "\\'")}')"
+                        onclick="app.openEditModal('${item.id}', '${this.escapeForInlineHandler(item.title)}')"
                     >
                         수정
                     </button>
                     <button
                         class="px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors text-sm font-medium"
-                        onclick="app.handleDelete('${item.id}', '${this.escapeHtml(item.title).replace(/'/g, "\\'")}')"
+                        onclick="app.handleDelete('${item.id}', '${this.escapeForInlineHandler(item.title)}')"
                     >
                         삭제
                     </button>
@@ -224,6 +224,17 @@ class BucketListApp {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    /**
+     * 큰따옴표로 감싼 인라인 이벤트 핸들러 속성('onclick="...">')에
+     * 안전하게 끼워넣기 위한 이스케이프. escapeHtml만으로는 큰따옴표(")가
+     * 그대로 남아 속성값을 조기 종료시키는 XSS가 가능하므로 별도 처리한다.
+     */
+    escapeForInlineHandler(text) {
+        return this.escapeHtml(text)
+            .replace(/'/g, "\\'")
+            .replace(/"/g, '&quot;');
     }
 
     /**
