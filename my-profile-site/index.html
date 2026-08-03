@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>홍길동 | 프론트엔드 개발자</title>
+  <meta name="description" content="홍길동의 개인 프로필 및 포트폴리오 웹사이트" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans antialiased">
+
+  <!-- Nav -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b border-white/5 bg-gray-950/80 backdrop-blur-md transition-colors">
+    <nav class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#home" class="text-lg font-bold tracking-tight">
+        <span class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">홍길동</span>
+      </a>
+
+      <ul class="hidden md:flex items-center gap-8 text-sm text-gray-300">
+        <li><a href="#about" class="nav-link hover:text-emerald-400 transition-colors" data-nav>소개</a></li>
+        <li><a href="#skills" class="nav-link hover:text-emerald-400 transition-colors" data-nav>기술 스택</a></li>
+        <li><a href="#projects" class="nav-link hover:text-emerald-400 transition-colors" data-nav>프로젝트</a></li>
+        <li><a href="#contact" class="nav-link hover:text-emerald-400 transition-colors" data-nav>연락처</a></li>
+      </ul>
+
+      <a href="#contact" class="hidden md:inline-flex items-center rounded-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 text-sm font-semibold px-4 py-2 transition-colors">
+        연락하기
+      </a>
+
+      <button id="menu-toggle" aria-label="메뉴 열기" class="md:hidden text-gray-200 p-2">
+        <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-white/5 bg-gray-950/95 px-6 py-4">
+      <ul class="flex flex-col gap-4 text-sm text-gray-300">
+        <li><a href="#about" class="mobile-nav-link block hover:text-emerald-400" data-nav>소개</a></li>
+        <li><a href="#skills" class="mobile-nav-link block hover:text-emerald-400" data-nav>기술 스택</a></li>
+        <li><a href="#projects" class="mobile-nav-link block hover:text-emerald-400" data-nav>프로젝트</a></li>
+        <li><a href="#contact" class="mobile-nav-link block hover:text-emerald-400" data-nav>연락처</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero / 소개 -->
+  <section id="home" class="relative overflow-hidden pt-40 pb-28 px-6">
+    <div class="hero-glow absolute inset-0 -z-10"></div>
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="fade-up inline-block text-xs font-semibold tracking-widest uppercase text-emerald-400 border border-emerald-400/30 rounded-full px-4 py-1 mb-6">
+        Frontend Developer
+      </p>
+      <h1 class="fade-up text-4xl sm:text-6xl font-extrabold tracking-tight mb-6">
+        안녕하세요, <span class="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">홍길동</span>입니다
+      </h1>
+      <p class="fade-up text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
+        사용자 경험을 중요하게 생각하는 프론트엔드 개발자입니다.<br />
+        빠르고 직관적인 인터페이스를 만드는 것을 좋아하며, 새로운 기술을 배우는 데 거리낌이 없습니다.<br />
+        현재는 웹 접근성과 성능 최적화에 관심을 두고 공부하고 있습니다.
+      </p>
+      <div class="fade-up flex items-center justify-center gap-4">
+        <a href="#projects" class="rounded-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-semibold px-6 py-3 transition-colors">
+          프로젝트 보기
+        </a>
+        <a href="#contact" class="rounded-full border border-white/10 hover:border-emerald-400/50 text-gray-200 font-semibold px-6 py-3 transition-colors">
+          연락하기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기술 스택 -->
+  <section id="skills" class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up text-center mb-16">
+        <h2 class="text-sm font-semibold tracking-widest uppercase text-emerald-400 mb-3">Skills</h2>
+        <p class="text-3xl font-bold">기술 스택</p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        <div class="fade-up skill-card">HTML</div>
+        <div class="fade-up skill-card">CSS</div>
+        <div class="fade-up skill-card">JavaScript</div>
+        <div class="fade-up skill-card">React</div>
+        <div class="fade-up skill-card">Tailwind CSS</div>
+        <div class="fade-up skill-card">Git</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 소개 상세 (About) -->
+  <section id="about" class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-4xl mx-auto grid sm:grid-cols-3 gap-8 text-center">
+      <div class="fade-up">
+        <p class="text-3xl font-extrabold text-emerald-400 mb-1">3+</p>
+        <p class="text-sm text-gray-400">년차 개발 경험</p>
+      </div>
+      <div class="fade-up">
+        <p class="text-3xl font-extrabold text-emerald-400 mb-1">12</p>
+        <p class="text-sm text-gray-400">완료한 프로젝트</p>
+      </div>
+      <div class="fade-up">
+        <p class="text-3xl font-extrabold text-emerald-400 mb-1">∞</p>
+        <p class="text-sm text-gray-400">배움에 대한 열정</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 프로젝트 -->
+  <section id="projects" class="py-24 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      <div class="fade-up text-center mb-16">
+        <h2 class="text-sm font-semibold tracking-widest uppercase text-emerald-400 mb-3">Projects</h2>
+        <p class="text-3xl font-bold">프로젝트 &amp; 포트폴리오</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Project 1 -->
+        <article class="fade-up project-card">
+          <div class="project-thumb bg-gradient-to-br from-emerald-500/20 to-teal-500/20"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2">할 일 관리 앱</h3>
+            <p class="text-sm text-gray-400 mb-4 leading-relaxed">
+              드래그 앤 드롭으로 우선순위를 조정할 수 있는 반응형 할 일 관리 웹 애플리케이션입니다.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag">React</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">LocalStorage</span>
+            </div>
+            <a href="#" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1">
+              자세히 보기 →
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="fade-up project-card">
+          <div class="project-thumb bg-gradient-to-br from-teal-500/20 to-cyan-500/20"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2">날씨 정보 대시보드</h3>
+            <p class="text-sm text-gray-400 mb-4 leading-relaxed">
+              공공 API를 활용해 지역별 실시간 날씨와 주간 예보를 시각화한 대시보드입니다.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Chart.js</span>
+              <span class="tag">REST API</span>
+            </div>
+            <a href="#" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1">
+              자세히 보기 →
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="fade-up project-card">
+          <div class="project-thumb bg-gradient-to-br from-emerald-500/20 to-lime-500/20"></div>
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2">개인 블로그</h3>
+            <p class="text-sm text-gray-400 mb-4 leading-relaxed">
+              마크다운 기반의 글 작성을 지원하는 정적 블로그로, 다크 모드와 태그 검색 기능을 제공합니다.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">JavaScript</span>
+            </div>
+            <a href="#" class="text-sm font-semibold text-emerald-400 hover:text-emerald-300 inline-flex items-center gap-1">
+              자세히 보기 →
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 연락처 -->
+  <section id="contact" class="py-24 px-6 border-t border-white/5">
+    <div class="fade-up max-w-2xl mx-auto text-center">
+      <h2 class="text-sm font-semibold tracking-widest uppercase text-emerald-400 mb-3">Contact</h2>
+      <p class="text-3xl font-bold mb-6">함께 이야기 나눠요</p>
+      <p class="text-gray-400 mb-8 leading-relaxed">
+        새로운 프로젝트, 협업 제안, 또는 커피챗 모두 환영합니다. 아래 이메일로 편하게 연락 주세요.
+      </p>
+      <a href="mailto:gildong.hong.dev@example.com"
+         class="inline-flex items-center gap-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-gray-950 font-semibold px-6 py-3 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        gildong.hong.dev@example.com
+      </a>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/5 py-8 px-6 text-center text-sm text-gray-500">
+    © <span id="year"></span> 홍길동. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

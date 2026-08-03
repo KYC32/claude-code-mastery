@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>홍길동 | Frontend Developer 이력서</title>
+<meta name="description" content="프론트엔드 개발자 홍길동의 웹 이력서입니다." />
+
+<!-- 다크모드를 기본 룩으로: 저장된 값이 없으면 항상 dark로 시작 (FOUC 방지를 위해 CSS/폰트 로드 전에 동기 실행) -->
+<script>
+  (function () {
+    var saved = localStorage.getItem('theme');
+    if (saved !== 'light') document.documentElement.classList.add('dark');
+  })();
+</script>
+
+<!-- Google Fonts: 굵은 산세리프(Space Grotesk) + 세리프 악센트(Fraunces) + 본문용 Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<!-- TailwindCSS: CDN 방식 (별도 빌드 없이 바로 사용) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          canvas: '#17130F',
+          'canvas-alt': '#221B15',
+          cream: '#F4EEE4',
+          ink: '#1C1712',
+          paper: '#F3ECE2',
+          'paper-muted': '#A79C8E',
+          rust: '#C1603A',
+          'rust-deep': '#93472A',
+        },
+        fontFamily: {
+          display: ['"Space Grotesk"', 'sans-serif'],
+          serif: ['"Fraunces"', 'serif'],
+          body: ['"Inter"', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  /* 스크롤 등장 애니메이션 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* 히어로 진입 애니메이션 (페이지 로드 시 한 번만 재생되는 오케스트레이션 무빙) */
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(1rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-rise {
+    animation: rise-in 0.8s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+    .hero-rise { animation: none; }
+  }
+
+  /* 러스트 톤 포커스 링 (키보드 접근성) */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid #C1603A;
+    outline-offset: 2px;
+  }
+</style>
+</head>
+
+<body class="font-body bg-rust antialiased">
+
+<div id="page" class="m-2 md:m-4 rounded-[28px] overflow-hidden bg-cream dark:bg-canvas text-ink dark:text-paper transition-colors">
+
+<!-- ===================== Header / Navigation ===================== -->
+<header class="sticky top-0 z-50 bg-cream/90 dark:bg-canvas/90 backdrop-blur border-b border-ink/10 dark:border-white/10">
+  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#profile" class="font-display font-bold text-lg tracking-tight text-rust">홍길동</a>
+
+    <!-- 데스크탑 내비게이션 -->
+    <nav class="hidden md:flex items-center gap-8 text-xs font-display font-medium uppercase tracking-widest">
+      <a href="#about" class="hover:text-rust transition-colors">소개</a>
+      <a href="#skills" class="hover:text-rust transition-colors">스킬</a>
+      <a href="#experience" class="hover:text-rust transition-colors">경력</a>
+      <a href="#projects" class="hover:text-rust transition-colors">프로젝트</a>
+      <a href="#education" class="hover:text-rust transition-colors">학력</a>
+      <a href="#social" class="hover:text-rust transition-colors">SNS</a>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <!-- 다크모드 토글 버튼 -->
+      <button id="theme-toggle" type="button" aria-label="다크모드 전환"
+        class="p-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/10 transition-colors">
+        <svg id="icon-sun" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1.5m0 15V21m9-9h-1.5M4.5 12H3m15.36 6.36-1.06-1.06M6.7 6.7 5.64 5.64m12.72 0-1.06 1.06M6.7 17.3l-1.06 1.06M16.5 12a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0Z" />
+        </svg>
+        <svg id="icon-moon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.598.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      </button>
+
+      <!-- 모바일 메뉴 버튼 -->
+      <button id="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false"
+        class="md:hidden p-2 rounded-lg hover:bg-ink/5 dark:hover:bg-white/10 transition-colors">
+        <svg id="icon-menu-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg id="icon-menu-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 모바일 메뉴 패널 -->
+  <nav id="mobile-menu" class="hidden md:hidden border-t border-ink/10 dark:border-white/10 bg-cream dark:bg-canvas">
+    <div class="px-6 py-4 flex flex-col gap-4 text-sm font-display uppercase tracking-wide">
+      <a href="#about" class="mobile-link">소개</a>
+      <a href="#skills" class="mobile-link">스킬</a>
+      <a href="#experience" class="mobile-link">경력</a>
+      <a href="#projects" class="mobile-link">프로젝트</a>
+      <a href="#education" class="mobile-link">학력</a>
+      <a href="#social" class="mobile-link">SNS</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===================== Profile / Hero ===================== -->
+  <section id="profile" class="px-6 pt-16 pb-20 md:pb-28">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- 오버사이즈 헤드라인 + 실제 스킬 태그 -->
+      <div class="hero-rise flex items-start justify-between gap-6 mb-10">
+        <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight">
+          Frontend<br />
+          <span class="font-serif italic font-normal text-rust">Developer</span>
+        </h1>
+        <ul class="hidden sm:flex flex-col items-end gap-1.5 pt-2 text-xs font-display uppercase tracking-widest text-ink/50 dark:text-paper-muted">
+          <li>/frontend</li>
+          <li>/react</li>
+          <li>/tailwindcss</li>
+        </ul>
+      </div>
+
+      <!-- 크림 프로필 카드 -->
+      <div class="hero-rise [animation-delay:150ms] bg-cream text-ink rounded-3xl p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-center md:items-start gap-8 border border-ink/10">
+        <img src="https://i.pravatar.cc/320?img=12" alt="프로필 사진"
+          class="w-28 h-28 md:w-36 md:h-36 rounded-2xl object-cover border-2 border-ink/10 shrink-0" />
+        <div class="flex-1 text-center md:text-left">
+          <p class="font-display text-xs uppercase tracking-widest text-rust mb-2">About</p>
+          <h2 class="font-display font-bold text-2xl md:text-3xl mb-1">홍길동</h2>
+          <p class="font-display font-medium text-sm text-rust mb-4">Frontend Developer</p>
+          <p class="text-sm text-ink/70 leading-relaxed mb-6 max-w-md">
+            사용자 경험을 고민하는 프론트엔드 개발자입니다. 새로운 기술을 배우고 적용하는 것을 좋아합니다.
+          </p>
+          <div class="flex flex-wrap justify-center md:justify-start gap-3">
+            <a href="mailto:example@email.com"
+              class="px-5 py-2.5 rounded-full bg-rust text-cream text-sm font-display font-medium hover:bg-rust-deep transition-colors">
+              이메일 보내기
+            </a>
+            <a href="#projects"
+              class="px-5 py-2.5 rounded-full border border-ink/20 text-sm font-display font-medium hover:bg-ink/5 transition-colors">
+              프로젝트 보기
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== About ===================== -->
+  <section id="about" class="reveal px-6 py-24">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-display text-xs uppercase tracking-widest text-rust mb-3">About</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl mb-6">소개</h2>
+      <p class="text-ink/70 dark:text-paper-muted leading-relaxed">
+        안녕하세요, 웹 프론트엔드 개발에 관심이 많은 개발자 홍길동입니다.
+        사용자에게 편리하고 직관적인 인터페이스를 제공하는 것을 목표로 개발하고 있으며,
+        새로운 기술 스택을 학습하고 실제 프로젝트에 적용하는 과정에서 큰 즐거움을 느낍니다.
+        협업과 커뮤니케이션을 중요하게 생각하며, 꾸준히 성장하는 개발자가 되고자 합니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== Skills ===================== -->
+  <section id="skills" class="reveal px-6 py-24 bg-ink/[0.03] dark:bg-white/[0.03]">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-display text-xs uppercase tracking-widest text-rust text-center mb-3">Skills</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">기술 스택</h2>
+      <div class="grid sm:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-display font-semibold text-xs uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-3">언어</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-display font-semibold text-xs uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-3">프레임워크 / 라이브러리</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TailwindCSS</span>
+            <span class="skill-tag">Next.js</span>
+          </div>
+        </div>
+        <div>
+          <h3 class="font-display font-semibold text-xs uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-3">툴 / 협업</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Notion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Experience ===================== -->
+  <section id="experience" class="reveal px-6 py-24">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-display text-xs uppercase tracking-widest text-rust text-center mb-3">Experience</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">경력</h2>
+      <div class="space-y-10">
+        <div class="border-l-2 border-rust pl-5">
+          <p class="text-xs font-display uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-1">2023.01 - 재직중</p>
+          <h3 class="font-display font-semibold text-lg mb-2">주식회사 예시 · Frontend Developer</h3>
+          <ul class="list-disc list-inside text-sm text-ink/70 dark:text-paper-muted space-y-1">
+            <li>사내 관리자 페이지 UI 개발 및 유지보수</li>
+            <li>컴포넌트 재사용성 개선으로 개발 생산성 향상에 기여</li>
+          </ul>
+        </div>
+        <div class="border-l-2 border-ink/15 dark:border-white/15 pl-5">
+          <p class="text-xs font-display uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-1">2021.03 - 2022.12</p>
+          <h3 class="font-display font-semibold text-lg mb-2">예시 스타트업 · Junior Developer</h3>
+          <ul class="list-disc list-inside text-sm text-ink/70 dark:text-paper-muted space-y-1">
+            <li>랜딩 페이지 및 이벤트 페이지 퍼블리싱</li>
+            <li>반응형 웹 구현 및 크로스 브라우저 대응</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Projects ===================== -->
+  <section id="projects" class="reveal px-6 py-24 bg-ink/[0.03] dark:bg-white/[0.03]">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-display text-xs uppercase tracking-widest text-rust text-center mb-3">Projects</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">프로젝트</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <article class="p-6 rounded-2xl bg-cream/60 dark:bg-canvas-alt border border-ink/10 dark:border-white/10 hover:border-rust/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg mb-2">개발자 웹 이력서</h3>
+          <p class="text-sm text-ink/70 dark:text-paper-muted mb-4">HTML, CSS, JavaScript, TailwindCSS로 제작한 반응형 웹 이력서.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">TailwindCSS</span>
+            <span class="skill-tag">JavaScript</span>
+          </div>
+          <a href="#" class="text-rust text-sm font-display font-medium hover:underline">GitHub 바로가기 →</a>
+        </article>
+        <article class="p-6 rounded-2xl bg-cream/60 dark:bg-canvas-alt border border-ink/10 dark:border-white/10 hover:border-rust/60 transition-colors">
+          <h3 class="font-display font-semibold text-lg mb-2">할 일 관리 앱</h3>
+          <p class="text-sm text-ink/70 dark:text-paper-muted mb-4">React 기반의 간단한 Todo 애플리케이션.</p>
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">TypeScript</span>
+          </div>
+          <a href="#" class="text-rust text-sm font-display font-medium hover:underline">GitHub 바로가기 →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Education ===================== -->
+  <section id="education" class="reveal px-6 py-24">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-display text-xs uppercase tracking-widest text-rust text-center mb-3">Education</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl text-center mb-10">학력</h2>
+      <div class="border-l-2 border-rust pl-5">
+        <p class="text-xs font-display uppercase tracking-wide text-ink/50 dark:text-paper-muted mb-1">2017.03 - 2021.02</p>
+        <h3 class="font-display font-semibold text-lg">예시대학교 · 컴퓨터공학과</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Social (SNS 링크) ===================== -->
+  <section id="social" class="reveal px-6 py-24 bg-ink/[0.03] dark:bg-white/[0.03] text-center">
+    <div class="max-w-2xl mx-auto">
+      <p class="font-display text-xs uppercase tracking-widest text-rust mb-3">Connect</p>
+      <h2 class="font-display font-bold text-2xl md:text-3xl mb-10">SNS</h2>
+      <div class="flex justify-center gap-4">
+        <a href="https://github.com/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.09 3.29 9.4 7.86 10.93.57.1.78-.25.78-.55 0-.27-.01-1.16-.02-2.11-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.18a11.05 11.05 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.77.12 3.06.74.8 1.18 1.83 1.18 3.09 0 4.43-2.7 5.4-5.27 5.68.42.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .3.2.66.79.55A10.52 10.52 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/>
+          </svg>
+        </a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M23.5 6.75s-.23-1.64-.95-2.36c-.9-.95-1.92-.95-2.38-1.01C16.87 3.14 12 3.14 12 3.14h-.01s-4.87 0-8.17.24c-.46.06-1.48.06-2.38 1.01C.72 5.11.5 6.75.5 6.75S.27 8.66.27 10.56v1.78c0 1.9.23 3.81.23 3.81s.22 1.64.94 2.36c.9.95 2.09.92 2.62 1.02 1.9.18 8.06.24 8.06.24s4.88-.01 8.17-.25c.46-.06 1.48-.06 2.38-1.01.72-.72.95-2.36.95-2.36s.23-1.9.23-3.81v-1.78c0-1.9-.23-3.81-.23-3.81ZM9.68 14.6V7.9l6.44 3.36-6.44 3.35Z"/>
+          </svg>
+        </a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.05.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.05.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.05-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.05-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07ZM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/>
+          </svg>
+        </a>
+        <a href="mailto:example@email.com" aria-label="Email" class="social-icon">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0-.83.67-1.5 1.5-1.5h16.5c.83 0 1.5.67 1.5 1.5v10.5c0 .83-.67 1.5-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5V6.75Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===================== Footer ===================== -->
+<footer class="border-t border-ink/10 dark:border-white/10 py-8 text-center text-xs font-display uppercase tracking-wide text-ink/50 dark:text-paper-muted">
+  <p>&copy; 2026 Hong Gildong. All rights reserved.</p>
+</footer>
+
+</div><!-- /#page -->
+
+<!-- 맨 위로 이동 버튼 -->
+<button id="back-to-top" type="button" aria-label="맨 위로 이동"
+  class="hidden fixed bottom-6 right-6 md:bottom-8 md:right-8 p-3 rounded-full bg-rust text-cream shadow-lg hover:bg-rust-deep transition-colors z-40">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 19.5V4.5m0 0-6 6m6-6 6 6" />
+  </svg>
+</button>
+
+<script>
+  // 반복 사용되는 Tailwind 유틸리티 조합을 컴포넌트 클래스처럼 재사용
+  document.querySelectorAll('.skill-tag').forEach((el) => {
+    el.className += ' px-3 py-1 rounded-full text-xs font-display font-medium bg-ink/5 dark:bg-canvas-alt text-ink dark:text-paper border border-rust/25 dark:border-rust/30';
+  });
+  document.querySelectorAll('.social-icon').forEach((el) => {
+    el.className += ' p-3 rounded-full border border-ink/15 dark:border-white/15 hover:bg-rust hover:text-cream hover:border-rust transition-colors';
+  });
+  document.querySelectorAll('.mobile-link').forEach((el) => {
+    el.className += ' hover:text-rust transition-colors';
+  });
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>
